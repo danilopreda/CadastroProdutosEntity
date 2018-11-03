@@ -1,0 +1,61 @@
+﻿@model IEnumerable<CadastroProdutos.Models.Produto>
+
+@{
+    ViewBag.Title = "Lista de Produtos";
+}
+
+<h2>Produtos</h2>
+
+<p>
+    @Html.ActionLink("Adicionar", "Create")
+</p>
+
+<p>
+    Pesquisar por Produto
+    @using(Html.BeginForm("Index", "Produtoes", FormMethod.Get))
+    {
+        @Html.TextBox("Pesquisa")
+        <input type="submit" value="Pesquisar" />
+    }
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Categoria")
+        </th>
+        <th>
+            @Html.DisplayName("Produto")
+        </th>
+        <th>
+            @Html.DisplayName("Preço")
+        </th>
+        <th>
+            @Html.DisplayName("Descrição")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.categoria.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.preco)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.descricao)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.codigo }) |
+            @Html.ActionLink("Detalhes", "Details", new { id=item.codigo }) |
+            @Html.ActionLink("Deletar", "Delete", new { id=item.codigo })
+        </td>
+    </tr>
+}
+
+</table>
